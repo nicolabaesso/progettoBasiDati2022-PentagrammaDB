@@ -18,16 +18,49 @@
 La Scuola di Musica Il Pentagramma è un’associazione culturale senza fini di lucro che dal 1982 ha lo scopo di promuovere, diffondere e sviluppare la conoscenza, l’apprendimento ed il perfezionamento della musica moderna e classica in tutte le sue tecniche strumentali e canore.\\
 L'associazione organizza corsi, senza limiti di età, per l'apprendimento di tecniche strumentali o vocali, di registrazione, composizione e di tutto ciò che sia collegato alla musica. Inoltre promuove la creazione di gruppi musicali e organizza eventi e concerti in proprio o in accordo con locali o enti privati e locali. Inoltre, offre ai soci sconti e agevolazioni per eventi e software musicali.\\
 I corsi, suddivisi tra corsi individuali, musica d'insieme, teatro e corsi propedeutici, sono tenuti da docenti diplomati al conservatorio e alcuni sono svolti anche dagli stessi dirigenti della scuola. Hanno durata di 30,45 o 60 minuti a seconda della tipologia del corso.\\
-L'associazione vuole costruire una base di dati affinché possa organizzare al meglio le attività dell'associazione, oltre che mantenere uno storico delle attività passate.
+L'associazione vuole costruire una base di dati affinché possa organizzare al meglio le attività dell'associazione, oltre che mantenere uno storico delle attività passate e dei membri che ne hanno fatto parte nel corso del tempo.
 
 \section{Analisi dei requisiti}
-	\subsection{Descrizione}
-	\subsection{Glossario}
-	\subsection{Strutturazione}
+	Si vuole rappresentare, attraverso una basi di dati, le attività e gli eventi organizzati dall'associazione Il Pentagramma.\\\\
+	Ogni \textbf{persona} collegata all'associazione è caratterizzata da codice fiscale, nome, cognome, data di nascita, numero di telefono e indirizzo email. Una persona può essere un associato, un docente, un dirigente oppure uno studente.\\\\
+	Di un \textbf{associato} è rilevante il codice della tessera a lui associata, la data d'iscrizione all'associazione e la data di scadenza dell'iscrizione.\\\\
+	Per un \textbf{docente} si vuole sapere la specializzazione in cui si è diplomato, la data di conseguimento del diploma, la data d'inizio dell'attività di insegnamento e, nel caso il docente non insegni più nella scuola, la data di fine. Per un \textbf{dirigente}, che è anche un docente, è rilevante conoscere il ruolo all'interno dell'associazione, la data di inizio in quel ruolo e, se presente, la data di fine in quel ruolo (che può combaciare con la data di fine insegnamento).\\\\
+	Uno \textbf{studente} è caratterizzato dalla tipologia (amatoriale o professionale) di percorso che segue e, in caso di percorso professionale, il livello a cui lo studente stesso si trova. Inoltre è d'interesse sapere la data d'inizio delle lezioni e l'eventuale data di fine.\\\\
+	Un \textbf{corso} è caratterizzato dal nome, dalla durata (in minuti) di una lezione e dal numero d'incontri in un mese. Un corso può essere individuale o collettivo.Per i corsi collettivi è d'interesse avere anche una descrizione breve del corso stesso.\\\\
+	Una \textbf{sede} è caratterizzata da nome, città e via nella quale si trova. Una sede può essere usata come sede per le lezioni o come sede per gli eventi. Per una \textbf{sede per eventi} è rilevante conoscere anche il numero massimo di posti disponibili.\\\\
+	Un \textbf{evento} è caratterizzato da nome, genere e numero di spettatori, essendo aperti agli associati e al pubblico generale. Inoltre è d'interesse conoscere i brani svolti durante l'evento, oltre agli studenti che li eseguono, se partecipanti. Negli eventi sono compresi anche i \textbf{saggi}, dove partecipano solo gli studenti della scuola.\\\\
+	Un \textbf{brano} è caratterizzato da nome, artista e genere. Ai fini delle attività dell'associazione, non sono d'interesse altre informazioni relative ai brani e ai relativi artisti.
+	\subsection{Glossario dei termini}
+	\subsection{Operazioni tipiche}
+		Le seguenti operazioni vengono generalmente effettuate a cadenza mensile.\\\\
+		\vline
+		\begin{tabular}{c|c}
+			\hline
+			1) Inserimento nuovi allievi & 20 al mese\\
+			\hline
+			2) Controllo delle iscrizioni relative ai soci & 5 al mese\\
+			\hline
+			3) Inserimento di eventi & 10 al mese\\
+			\hline
+		\end{tabular}
+		\vline \\\\
+		Mentre le seguenti operazioni vengono effettuate durante l'anno.\\\\
+		\vline
+		\begin{tabular}{c|c}
+			\hline
+			4) Archiviazione dell'anno accademico & 270 all'anno\\
+			\hline
+			5) Controllo dei docenti & 60 all'anno\\
+			\hline
+			6) Controllo delle sedi & 40 all'anno\\
+			\hline
+			7) Controllo dei corsi & 20 all'anno\\
+			\hline
+		\end{tabular}
+		\vline
 \section{Progettazione concettuale}
 	\subsection{Lista delle entità}
-	\subsection{Lista delle associazioni}
-	\subsection{Lista delle generalizzazioni}
+	\subsection{Lista delle relazioni}
 	\subsection{Schema ER}
 
 \end{document}
