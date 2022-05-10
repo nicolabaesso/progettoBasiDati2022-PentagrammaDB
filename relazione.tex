@@ -11,9 +11,7 @@
 \begin{center} %mette il contenuto in centro
 	\includegraphics{logo.jpeg}	
 \end{center}
-\newpage %crea una nuova pagina (chiudendo la precedente)
-\tableofcontents %crea la tabella dei contenuti
-\newpage
+
 \section{Abstract}
 La Scuola di Musica Il Pentagramma è un’associazione culturale senza fini di lucro che dal 1982 ha lo scopo di promuovere, diffondere e sviluppare la conoscenza, l’apprendimento ed il perfezionamento della musica moderna e classica in tutte le sue tecniche strumentali e canore.\\
 L'associazione organizza corsi, senza limiti di età, per l'apprendimento di tecniche strumentali o vocali, di registrazione, composizione e di tutto ciò che sia collegato alla musica. Inoltre promuove la creazione di gruppi musicali e organizza eventi e concerti in proprio o in accordo con locali o enti privati e locali, in modo da diffondere la cultura musicale sia ai suoi associati sia a chiunque voglia partecipare, e quindi contribuire alla diffusione di tale cultura.\\
@@ -311,9 +309,64 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			\hline
 		\end{tabular}
 	\subsection{Lista delle relazioni}
+		Studente-Audizione: \textbf{Allievo}\\
+		-Uno studente partecipa ad almeno una audizione (1,N)\\
+		-Un audizione deve essere svolta da almeno uno studente (1,N)\\
+		\\
+		Docente-Audizione: \textbf{Auditore}\\
+		-Un docente deve essere presente ad almeno una audizione (1,N)\\
+		-Un audizione deve essere presente almeno un docente (1,N)\\
+		\\
+		Studente-Esame: \textbf{Esaminato}\\
+		-Un studente può partecipare a uno o più esami (0,N)\\
+		-Ad ogni esame partecipa almeno uno studente (1,N)\\
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\multicolumn{3}{|c|}{Attributi di \textbf{Esaminato}}\\
+			\hline
+			EsitoEsame & bool & L'esito dell'esame\\
+			\hline
+		\end{tabular}
+		\\\\
+		Docente-Esame: \textbf{Esaminatore}\\
+		-Un docente può prendere parte a uno o più esami (0,N)\\
+		-Ogni esame ha almeno un docente (1,N)\\
+		\\
+		Studente-Scaletta: \textbf{Performance}\\
+		-Uno studente può essere inserito in una o più scalette (0,N)\\
+		-Una scaletta è composta da almeno uno studente (1,N)\\
+		\\
+		Studente-Attivita: \textbf{Apprendimento}\\
+		-Uno studente è coinvolto in almeno un'attività (1,N)\\
+		-Ogni attività ha almeno uno studente (1,N)\\
+		\\
+		Docente-Attivita: \textbf{Insegnamento}\\
+		-Ogni attività è tenuta da un docente (1,1)\\
+		-Ogni docente prende parte ad almeno un'attività (1,N)\\
+		\\
+		Brano-Scaletta: \textbf{BranoEseguito}\\
+		-Ogni scaletta ha almeno un brano (1,N)\\
+		-Ogni brano è presente in almeno una scaletta (1,N)\\
+		\\
+		Attivita-SedeLezione: \textbf{LuogoLezione}\\
+		-Un'attività viene svolta in una sede per le lezioni (1,1)\\
+		-Ogni sede per le lezioni ospita almeno un'attività (1,N)\\
+		\\
+		Attivita-Corso: \textbf{Erogazione}\\
+		-Un'attività è legata ad un solo corso (1,1)\\
+		-Un corso è legato ad almeno un'attività (1,N)\\
+		\\
+		Scaletta-Evento: \textbf{Esecuzione}\\
+		-Ogni scaletta si riferisce ad un evento (1,1)\\
+		-Ogni evento ha una scaletta (1,1)\\
+		\\
+		Evento-Sedevento: \textbf{LuogoEvento}\\
+		-Ogni evento è tenuto in una sede per eventi (1,1)\\
+		-Ogni sede per eventi ospita almeno un evento (1,N)\\
 	\subsection{Schema ER}
 		\includegraphics[scale=0.15]{ER.png}
 	\subsection{Vincoli non esprimibili nello Schema ER}
+		Auditore:\\ -Per ogni studente, dev'essere presente il docente con cui frequenta il corso.\\\\ Docente:\\ -FineDocenza, se presente, dev'essere inferiore a InizioDocenza.\\\\ Studente:\\ -FineLezioni, se presente, dev'essere inferiore a InizioLezioni.\\\\ Dirigente:\\ -FineDirigenza, se presente, dev'essere inferiore a InizioDirigenza.\\ -Ruolo non può essere ricoperto più volte dalla stessa persona.\\\\ Associato:\\ -DataScadenza successiva a DataIscrizione.\\\\ Esaminato:\\ -studente deve avere la tipologia "professionale".\\\\ Esaminatore:\\ -ogni esame ha al più 3 docenti.\\\\ Attivita:\\ -FineAttività se presente superiore a InizioAttività.\\\\ Corso:\\ -durataLezione inferiore a 60.\\\\ Evento:\\ -Organizzatore e Co-organizzatore non possono esistere contemporaneamente.\\\\ Saggio:\\ -Organizzatore e Co-organizzatore sono null.
 \section{Progettazione logica}
 	\subsection{Analisi delle ridondanze}
 	\subsection{Partizionamento / Accorpamento di entità e associazioni}
@@ -322,6 +375,6 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 	\subsection{Schema relazionale e vincoli di integrità referenziale}
 \section{Query}
 \section{Indice}
-\section{Codice C}
+\section{Codice C++}
 
 \end{document}
