@@ -9,7 +9,7 @@
 
 \maketitle %crea il titolo
 \begin{center} %mette il contenuto in centro
-	\includegraphics{../logo.jpeg}	
+	%\includegraphics{../logo.jpeg}	
 \end{center}
 
 \section{Abstract}
@@ -366,16 +366,17 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 		-Ogni evento è tenuto in una sede per eventi (1,1)\\
 		-Ogni sede per eventi ospita almeno un evento (1,N)\\
 	\subsection{Schema ER}
-		\includegraphics[scale=0.6]{../SchemaConcettuale/ERConcettuale.jpeg}
+		\includegraphics[scale=0.6]{../SchemaConcettuale/ER-LUCIDCHART - ER-concettuale 1.jpeg}
 	\subsection{Vincoli non esprimibili nello Schema ER}
 		Auditore:\\ -Per ogni studente, tra gli auditori dev'essere presente il docente con cui frequenta il corso.\\\\ Docente:\\ -FineDocenza, se presente, deve avere un valore superiore rispetto a InizioDocenza.\\\\ Studente:\\ -FineLezioni, se presente, deve avere un valore superiore rispetto a InizioLezioni.\\\\ Dirigente:\\ -FineDirigenza, se presente, deve avere un valore superiore rispetto a InizioDirigenza.\\ -Un dirigente non può ricoprire lo stesso ruolo più volte.\\\\ Associato:\\ -DataScadenza dev'essere successiva a DataIscrizione.\\\\ Esaminato:\\ -lo studente deve avere la tipologia "professionale".\\\\ Esaminatore:\\ -ogni esame ha al più 3 docenti.\\\\ Attivita:\\ -FineAttività, se presente, deve avere un valore superiore rispetto a InizioAttività.\\\\ Corso:\\ -durataLezione deve avere un valore inferiore a 60.\\\\ Evento:\\ -Organizzatore e Co-organizzatore si escludono a vicenda, ovvero se Organizzatore è non nullo, Co-Organizzatore è nullo e viceversa.\\\\ Saggio:\\ -Organizzatore e Co-organizzatore sono nulli.
 \section{Progettazione logica}
 	\subsection{Eliminazione delle generalizzazioni}
-		Generalizzazione totale Persona: sostituzione della generalizzazione con relazioni.
-		Generalizzazione parziale Docente: accorpamento di figlia nella madre.
-		Generalizzazione totale Corso: accorpamento di figlie nella madre.
-		Generalizzazione totale Sede: accorpamento di figlie nella madre.
-		Generalizzazione parziale Evento: accorpamento di figlia nella madre.
+		Per le varie generalizzazioni, si è scelto di seguire percorsi differenti. Di seguito i dettagli:\\
+		-\textbf{Persona}: si è scelto di sostituire la generazione con più relazioni. La corporazione degli attributi delle entità figlia nell'entità genitore porterebbe a tuple molto grandi e con un numero di valori nulli non indifferente, oltre ad una inevitabile complicazione della gestione. D'altro canto, inglobare gli attributi dell'entità genitore nelle entità figlie porterebbe a seri problemi di ridondanze e inconsistenze. Si è quindi ritenuto più opportuno collegare le varie entità figlie all'entità genitore tramite delle relazioni, in modo da escludere ogni possibile ridondanza e inconsistenza, mantenendo anche delle tuple senza eccessivi valori nulli.\\
+		-\textbf{Docente}: per questa generalizzazione parziale si è scelto di accorpare l'entità figlia nella madre. Poichè il numero di tuple riguardanti i dirigenti è al più uguale al numero di tuple riguardanti i docenti, l'avere più tuple con valori nulli non risulta invadente. Quindi un docente viene riconosciuto anche come dirigente se almeno gli attributi RuoloDirigente e InizioDirigenza sono non nulli, altrimenti viene riconosciuto solo come docente.\\
+		-\textbf{Corso}: si è scelto anche in questo caso di accorpare le entità figlie nell'entità madre, essendoci solo un attributo differente tra le varie entità. I corsi sono distinti tramite il nuovo attributo TipologiaCorso, e la descrizione deve essere non nulla solo se il corso è di tipo collettivo.\\
+		-\textbf{Sede}: anche per questa generalizzazione totale si è scelto di accorpare le entità figlie nell'entità genitore, essendoci pure in questo caso solo un attributo differente tra le varie entità. Per distinguere tra le due tipologie di sedi si utilizza l'attributo Utilizzo. Ciò impone anche il controllo su MaxPosti, che deve essere non nullo solo se la sede è utilizzata per gli eventi.\\
+		-\textbf{Evento}: si è scelto di accorpare l'entità figlia nell'entità genitore figlia poichè l'entità figlia non porta alcuna ulteriore informazione. Per distinguere un evento da un saggio si utilizza l'attributo TipoEvento. Inoltre è necessario che, in caso l'evento sia un saggio, sia Organizzatore che Co-Organizzatore devono essere entrambi nulli.\\
 	\subsection{Analisi delle ridondanze}
 		L'attributo "NumeroStudenti" nella entità "Attivita" è ridondante in quanto si può ricavare tramite la relazione "Apprendimento".
 		Tale ridondanza affligge l'operazione n°1:
@@ -384,6 +385,7 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 	\subsection{Partizionamento / Accorpamento di entità e associazioni}
 	\subsection{Scelta degli identificatori principali}
 	\subsection{Diagramma E-R ristruttutato}
+		\includegraphics[scale=0.55]{../SchemaConcettuale/ER-LUCIDCHART - ER-concettuale 2.jpeg}
 	\subsection{Schema relazionale e vincoli di integrità referenziale}
 \section{Query}
 \section{Indice}
