@@ -9,7 +9,7 @@
 
 \maketitle %crea il titolo
 \begin{center} %mette il contenuto in centro
-	%\includegraphics{../logo.jpeg}	
+	\includegraphics{../logo.jpeg}	
 \end{center}
 
 \section{Abstract}
@@ -311,8 +311,8 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			\hline
 		\end{tabular}
 	\subsection{Lista delle relazioni}
-		Studente-Audizione: \textbf{Allievo}\\
-		-Uno studente partecipa ad almeno una audizione (1,N)\\
+		Studente-Audizione: \textbf{Accertamento}\\
+		-Uno studente può aver già partecipato ad almeno una audizione (0,N)\\
 		-Un audizione deve essere svolta da almeno uno studente (1,N)\\
 		\\
 		Docente-Audizione: \textbf{Auditore}\\
@@ -378,10 +378,39 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 		-\textbf{Sede}: anche per questa generalizzazione totale si è scelto di accorpare le entità figlie nell'entità genitore, essendoci pure in questo caso solo un attributo differente tra le varie entità. Per distinguere tra le due tipologie di sedi si utilizza l'attributo Utilizzo. Ciò impone anche il controllo su MaxPosti, che deve essere non nullo solo se la sede è utilizzata per gli eventi.\\
 		-\textbf{Evento}: si è scelto di accorpare l'entità figlia nell'entità genitore figlia poichè l'entità figlia non porta alcuna ulteriore informazione. Per distinguere un evento da un saggio si utilizza l'attributo TipoEvento. Inoltre è necessario che, in caso l'evento sia un saggio, sia Organizzatore che Co-Organizzatore devono essere entrambi nulli.\\
 	\subsection{Analisi delle ridondanze}
-		L'attributo "NumeroStudenti" nella entità "Attivita" è ridondante in quanto si può ricavare tramite la relazione "Apprendimento".
-		Tale ridondanza affligge l'operazione n°1:
-		
-		Op.1: Inserimento e lettura studenti nei corsi scelti.
+		L'attributo "NumeroStudenti" nell' entità "Attivita" è ridondante in quanto si può ricavare tramite la relazione "Apprendimento".
+		Tale ridondanza affligge l'operazione n°1, ovvero l'inserimento e lettura degli studenti e dei relativi corsi scelti dagli studenti stessi. Si ha questa tabella degli accessi, una con ridondanza assente ed una con ridondanza presente:\\
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\multicolumn{4}{|c|}{Tavola degli accessi in presenza di ridondanze}\\
+			\hline
+			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} &\textbf{Operazione}\\
+			\hline
+			Attivita&E&1&L\\
+			\hline
+			Attivita&E&1&S\\
+			\hline
+			Apprendimento&R&1&S\\
+			\hline
+			Studente&E&1&S\\
+			\hline
+		\end{tabular}\\\\
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\multicolumn{4}{|c|}{Tavola degli accessi in assenza di ridondanze}\\
+			\hline
+			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} &\textbf{Operazione}\\
+			\hline
+			Attivita&E&1&L\\
+			\hline
+			Apprendimento&R&1&L\\
+			\hline
+			Apprendimento&R&1&S\\
+			\hline
+			Studente&E&1&S\\
+			\hline
+		\end{tabular}\\
+		Tali accessi devono essere moltiplicati per ogni studente inserito, che equivale a 100 studenti al mese. Per gli accessi in scrittura, tale ridondanza non porta alcun beneficio evidente, dovendo aggiornare anche l'attributo in attività. Si noti però come tale ridondanza sia ottimale, poichè il controllo del numero di iscritti ad una attività senza la ridondanza prevede un'unione tra Attivita ed Apprendimento, e specialmente per determinati parametri tale operazione può diventare onerosa in termini di tempo (si ricorda che la base di dati assume anche una funzione di archivio).
 	\subsection{Partizionamento / Accorpamento di entità e associazioni}
 	\subsection{Scelta degli identificatori principali}
 	\subsection{Diagramma E-R ristruttutato}
