@@ -24,7 +24,7 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 	Di un \textbf{associato} è rilevante il codice della tessera a lui associata, la data d'iscrizione all'associazione e la data di scadenza dell'iscrizione.\\\\
 	Per un \textbf{docente} si vuole sapere la specializzazione in cui si è diplomato, la data di conseguimento del diploma, la data d'inizio dell'attività di insegnamento e, nel caso il docente non insegni più nella scuola, la data di fine. Inoltre, in caso di insegnamento in più corsi, è rilevante conoscere, assieme al corso, la data di inizio e l'eventuale fine di docenza in quel corso. Per un \textbf{dirigente}, che è anche un docente, è rilevante conoscere l'unico ruolo che copre all'interno dell'associazione, la data di inizio in quel ruolo e, se presente, la data di fine in quel ruolo (che può combaciare con la data di fine insegnamento).\\\\
 	Uno \textbf{studente} è caratterizzato dalla tipologia (amatoriale o professionale) di percorso che segue e, in caso di percorso professionale, il livello a cui lo studente stesso si trova. Inoltre è d'interesse sapere la data d'inizio delle lezioni e l'eventuale data di fine. Infine, se lo studente risulta iscritto all'associazione ma frequenta dei corsi diversi rispetto ai corsi con cui ha cominciato, è rilevante conoscere la data d'inizio e di eventuale fine di frequentazione di ciascun corso frequentato.\\\\
-	Un \textbf{corso} è caratterizzato dal nome, dalla durata (in minuti) di una lezione e dal numero d'incontri in un mese. Un corso può essere individuale o collettivo.Per i corsi collettivi è d'interesse avere anche una descrizione breve del corso stesso. Tale attributo non è rilevante per i corsi individuali in quanto già esplicativi col nome stesso.\\\\
+	Un \textbf{corso} è caratterizzato dal nome, dalla durata (in minuti) di una lezione e dal numero d'incontri in un mese (che è un valore compreso tra 1 e 4). Un corso può essere individuale o collettivo.Per i corsi collettivi è d'interesse avere anche una descrizione breve del corso stesso. Tale attributo non è rilevante per i corsi individuali in quanto già esplicativi col nome stesso.\\\\
 	Una \textbf{sede} è caratterizzata da nome, città e via nella quale si trova. Una sede può essere usata come sede per le lezioni o come sede per gli eventi. Per una \textbf{sede per eventi} è rilevante conoscere anche il numero massimo di posti disponibili.\\\\
 	Un \textbf{evento} è caratterizzato da nome, genere, sede dove viene svolto e numero di spettatori, essendo aperti al pubblico. Se l'evento non è direttamente organizzato dall'associazione, oppure l'associazione non è l'unica organizzatrice dell'evento, allora è d'interesse anche conoscere il nome degli organizzatori o co-organizzatori. Inoltre è d'interesse conoscere i brani svolti durante l'evento, oltre agli studenti che li eseguono, se partecipanti. Negli eventi sono compresi anche i \textbf{saggi}, organizzati solo dall'associazione e dove partecipano solo gli studenti della scuola.\\\\
 	Un \textbf{brano} è caratterizzato da nome, artista e genere. Ai fini delle attività dell'associazione, non sono d'interesse altre informazioni relative ai brani e ai relativi artisti.\\\\
@@ -123,7 +123,7 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			Email & varchar(50) & L' indirizzo mail della persona\\
 			\hline
 		\end{tabular}
-		\\\\ \textbf{Persona} si specializza in \textbf{Associato}, \textbf{Studente} e \textbf{Docente}.\\\\
+		\\\\ \textbf{Persona} si specializza in \textbf{Associato}, \textbf{Studente} e \textbf{Docente}.\\
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{\textbf{Associato}: un iscritto all'associazione}\\
@@ -135,7 +135,7 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			DataScadenza & date & La data di scadenza dell'iscrizione\\
 			\hline
 		\end{tabular}
-		\\\\\\
+		\\\\
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{\textbf{Studente}: colui che frequenta i corsi organizzati dall'associazione}\\
@@ -152,7 +152,7 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			FineLezioni (0,1) & date & La data di fine di frequenza dei corsi\\
 			\hline
 		\end{tabular}
-		\\\\\\
+		\\\\
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{\textbf{Docente}: una persona che insegna nei corsi dell'associazione}\\
@@ -170,7 +170,7 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 		\end{tabular}
 		\\\\
 		\textbf{Docente} può specializzarsi in \textbf{Dirigente}
-		\\\\
+		\\
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{\textbf{Dirigente}: docente con un ruolo di rilevanza nell'organizzazione dell'associazione}\\
@@ -206,7 +206,7 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			LezioneMese & int & Il numero di lezioni mensili che il corso prevede\\
 			\hline
 		\end{tabular}
-		\\\\ \textbf{Corso} si specializza in \textbf{Individuale} e \textbf{Collettivo}.\\\\
+		\\\\ \textbf{Corso} si specializza in \textbf{Individuale} e \textbf{Collettivo}.\\
 		\begin{tabular}{|c|c|c|}
 			\hline
 			\multicolumn{3}{|c|}{\textbf{Individuale}: corso che offre lezioni individuali}\\
@@ -364,22 +364,49 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 		\\
 		Evento-Sedevento: \textbf{LuogoEvento}\\
 		-Ogni evento è tenuto in una sede per eventi (1,1)\\
-		-Ogni sede per eventi ospita almeno un evento (1,N)\\
+		-Ogni sede per eventi ospita almeno un evento (1,N)
 	\subsection{Schema ER}
 		\includegraphics[scale=0.6]{../SchemaConcettuale/ER-LUCIDCHART - ER-concettuale 1.jpeg}
 	\subsection{Vincoli non esprimibili nello Schema ER}
-		Auditore:\\ -Per ogni studente, tra gli auditori dev'essere presente il docente con cui frequenta il corso.\\\\ Docente:\\ -FineDocenza, se presente, deve avere un valore superiore rispetto a InizioDocenza.\\\\ Studente:\\ -FineLezioni, se presente, deve avere un valore superiore rispetto a InizioLezioni.\\\\ Dirigente:\\ -FineDirigenza, se presente, deve avere un valore superiore rispetto a InizioDirigenza.\\ -Un dirigente non può ricoprire lo stesso ruolo più volte.\\\\ Associato:\\ -DataScadenza dev'essere successiva a DataIscrizione.\\\\ Esaminato:\\ -lo studente deve avere la tipologia "professionale".\\\\ Esaminatore:\\ -ogni esame ha al più 3 docenti.\\\\ Attivita:\\ -FineAttività, se presente, deve avere un valore superiore rispetto a InizioAttività.\\\\ Corso:\\ -durataLezione deve avere un valore inferiore a 60.\\\\ Evento:\\ -Organizzatore e Co-organizzatore si escludono a vicenda, ovvero se Organizzatore è non nullo, Co-Organizzatore è nullo e viceversa.\\\\ Saggio:\\ -Organizzatore e Co-organizzatore sono nulli.
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{Entità o relazione} & \textbf{Vincolo}\\
+			\hline
+			Auditore&Per ogni studente, tra gli auditori dev'essere presente\\
+			&il docente con cui frequenta il corso.\\
+			\hline
+			Docente&Per ogni docente, se ha valore non nullo, FineDocenza $\ge$ InizioDocenza\\
+			\hline
+			Studente&Per ogni docente, se ha valore non nullo, FineLezioni $\ge$ InizioLezioni\\
+			\hline
+			&Per ogni dirigente, se ha valore non nullo, FineDirigenza $\ge$ InizioDirigenza\\
+			&Per ogni D1, D2 dirigenti distinti con ruolo in comune,\\
+			Dirigente&D2.InizioDirigenza $\geq$ D1.FineDirigenza.\\
+			&Per ogni dirigente, se FineDocenza e FineDirigenza hanno valori non nulli,\\
+			&FineDirigenza $\leq$ FineDocenza\\
+			\hline
+			Associato&DataScadenza $\ge$ DataIscrizione\\
+			\hline
+			Esaminato&Tipologia di studente: Professionale\\
+			\hline
+			Esaminatore&1$\leq$numero di esaminatori$\leq$3\\
+			\hline
+			Attivita&Per ogni attività, se ha valore non nullo, FineAttivita $\geq$ InizioAttivita\\
+			\hline
+			Corso&durataLezione $\leq$ 60\\
+			&1$\leq$lezioniMese$\leq$4\\
+			\hline
+			&Organizzatore ha valore non nullo $\Leftrightarrow$ Co-Organizzatore ha valore nullo\\
+			Evento&e\\
+			&Organizzatore ha valore nullo $\Leftrightarrow$ Co-Organizzatore ha valore non nullo.\\
+			\hline
+			Saggio&Organizzatore e Co-Organizzatore hanno entrambi valori nulli.\\
+			\hline
+		\end{tabular}
 \section{Progettazione logica}
-	\subsection{Eliminazione delle generalizzazioni}
-		Per le varie generalizzazioni, si è scelto di seguire percorsi differenti. Di seguito i dettagli:\\
-		-\textbf{Persona}: si è scelto di sostituire la generazione con più relazioni. La corporazione degli attributi delle entità figlia nell'entità genitore porterebbe a tuple molto grandi e con un numero di valori nulli non indifferente, oltre ad una inevitabile complicazione della gestione. D'altro canto, inglobare gli attributi dell'entità genitore nelle entità figlie porterebbe a seri problemi di ridondanze e inconsistenze. Si è quindi ritenuto più opportuno collegare le varie entità figlie all'entità genitore tramite delle relazioni, in modo da escludere ogni possibile ridondanza e inconsistenza, mantenendo anche delle tuple senza eccessivi valori nulli.\\
-		-\textbf{Docente}: per questa generalizzazione parziale si è scelto di accorpare l'entità figlia nella madre. Poichè il numero di tuple riguardanti i dirigenti è al più uguale al numero di tuple riguardanti i docenti, l'avere più tuple con valori nulli non risulta invadente. Quindi un docente viene riconosciuto anche come dirigente se almeno gli attributi RuoloDirigente e InizioDirigenza sono non nulli, altrimenti viene riconosciuto solo come docente.\\
-		-\textbf{Corso}: si è scelto anche in questo caso di accorpare le entità figlie nell'entità madre, essendoci solo un attributo differente tra le varie entità. I corsi sono distinti tramite il nuovo attributo TipologiaCorso, e la descrizione deve essere non nulla solo se il corso è di tipo collettivo.\\
-		-\textbf{Sede}: anche per questa generalizzazione totale si è scelto di accorpare le entità figlie nell'entità genitore, essendoci pure in questo caso solo un attributo differente tra le varie entità. Per distinguere tra le due tipologie di sedi si utilizza l'attributo Utilizzo. Ciò impone anche il controllo su MaxPosti, che deve essere non nullo solo se la sede è utilizzata per gli eventi.\\
-		-\textbf{Evento}: si è scelto di accorpare l'entità figlia nell'entità genitore figlia poichè l'entità figlia non porta alcuna ulteriore informazione. Per distinguere un evento da un saggio si utilizza l'attributo TipoEvento. Inoltre è necessario che, in caso l'evento sia un saggio, sia Organizzatore che Co-Organizzatore devono essere entrambi nulli.\\
 	\subsection{Analisi delle ridondanze}
-		L'attributo "NumeroStudenti" nell' entità "Attivita" è ridondante in quanto si può ricavare tramite la relazione "Apprendimento".
-		Tale ridondanza affligge l'operazione n°1, ovvero l'inserimento e lettura degli studenti e dei relativi corsi scelti dagli studenti stessi. Si ha questa tabella degli accessi, una con ridondanza assente ed una con ridondanza presente:\\
+		L'attributo "NumeroStudenti" nell'entità "Attivita" è ridondante in quanto tale informazione può essere ricavata tramite la relazione "Apprendimento".
+		Tale ridondanza affligge l'operazione n°1, ovvero l'inserimento e lettura degli studenti e dei relativi corsi scelti dagli studenti stessi. Si hanno le seguenti tabelle degli accessi, una con ridondanza assente ed una con ridondanza presente:\\
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\multicolumn{4}{|c|}{Tavola degli accessi in presenza di ridondanze}\\
@@ -410,7 +437,34 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			Studente&E&1&S\\
 			\hline
 		\end{tabular}\\
-		Tali accessi devono essere moltiplicati per ogni studente inserito, che equivale a 100 studenti al mese. Per gli accessi in scrittura, tale ridondanza non porta alcun beneficio evidente, dovendo aggiornare anche l'attributo in attività. Si noti però come tale ridondanza sia ottimale, poichè il controllo del numero di iscritti ad una attività senza la ridondanza prevede un'unione tra Attivita ed Apprendimento, e specialmente per determinati parametri tale operazione può diventare onerosa in termini di tempo (si ricorda che la base di dati assume anche una funzione di archivio).
+		Tali accessi devono essere moltiplicati per ogni studente inserito, che equivale a 100 studenti al mese. Per gli accessi in scrittura, tale ridondanza non porta alcun beneficio evidente, dovendo aggiornare anche l'attributo in attività (per quanto sia rilevante il peso di aggiornamento dello stesso). Si noti però come tale ridondanza sia ottimale nella fase di lettura, poichè il controllo del numero di iscritti ad una attività senza la ridondanza prevede un'unione tra Attivita ed Apprendimento e, specialmente per determinati parametri, tale operazione può risultare onerosa in termini di tempo (si ricorda che la base di dati assume anche una funzione di archivio), percui si è deciso di mantenere la ridondanza.
+	\subsection{Eliminazione delle generalizzazioni}
+		Per la generalizzazione \textbf{Persona-Studente,Docente,Associato} si è scelto di sostituire la generalizzazione con più relazioni, poichè accorpare gli attributi delle entità figlie nell'entità Persona porterebbe a tuple nell'entità molto grandi e con una quantità di valori nulli non indifferente, mentre l'operazione inversa, ovvero accorpare gli attributi dell'entità Persona nelle varie entità figlie, porterebbe ad una ridondanza di tale attributi, quindi a possibili inconsistenze non previste dalla base di dati (per esempio, non si possono avere studenti che sono contemporaneamente docenti e/o associati). Tale soluzione permette di evitare pericolose inconsistenze, senza avere un peso consistente durante la lettura dei dati, poichè le entità figlie ottengono come attributo identificativo la chiave di Persona.\\
+		Per le altre generalizzazioni si è optato per accorpare gli attributi dell'entita figlia nell'entita genitore. In particolare:\\
+		-Per la generalizzazione parziale \textbf{Docente-Dirigente}, un docente svolge anche una funzione da dirigente se e solo se almeno la coppia di attributi RuoloDirigente-InizioDirigenza è non nulla, ovvero entrambi gli attributi hanno valori non nulli.\\
+		-Per la generalizzazione totale \textbf{Corso-Individuale,Collettivo}, un corso individuale si distingue da un corso collettivo tramite l'attributo TipologiaCorso, che contiene la distinzione tra individuale (I) e collettivo (C). Inoltre, l'attributo Descrizione avrà un valore nullo se e solo se TipologiaCorso='I'.\\
+		-Per la generalizzazione totale \textbf{Sede-SedeLezione,SedEvento}, una sede adibita per le lezioni si distingue da una sede adibita per gli eventi tramite l'attributo Utilizzo, che può assumere due valori: 'L' oppure 'E'. L'attributo MaxPosti assume valore non nullo se e solo se utilizzo='E'.\\
+		-Per la generalizzazione parziale \textbf{Evento-Saggio} viene semplicemente aggiunto l'attributo TipoEvento per distinguere un saggio (S) da un evento normale (N), dato che l'entità Saggio non contribuiva con informazioni aggiuntive. Gli attributi Organizzatore e Co-Organizzatore devono avere valore nullo se e solo se TipoEvento='S'.\\
+	\subsection{Attributi multipli}
+		Gli attributi multipli presenti tra le varie entità vengono scomposti in più attributi, non potendo rappresentare gli attributi multipli nella base di dati finale.\\
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\multicolumn{3}{|c|}{Scomposizione degli attributi multipli}\\
+			\hline
+			\textbf{Entità} & \textbf{Attributo multiplo} & \textbf{Scomposizione}\\
+			\hline
+			Persona&Contatto&Telefono, Email\\
+			\hline
+			Docente&PeriodoDocenza&InizioDocenza, FineDocenza (0,1)\\
+			&PeriodoDirigenza&InizioDirigenza, FineDirigenza (0,1)\\
+			\hline
+			Studente&PeriodoLezioni&InizioLezioni, FineLezioni (0,1)\\
+			\hline
+			Evento&Organizzazione&Organizzatore (0,1), Co-Organizzatore (0,1)\\
+			\hline
+			Sede&Locazione&Indirizzo, Citta\\
+			\hline
+		\end{tabular}\\
 	\subsection{Partizionamento / Accorpamento di entità e associazioni}
 	\subsection{Scelta degli identificatori principali}
 	\subsection{Diagramma E-R ristruttutato}
