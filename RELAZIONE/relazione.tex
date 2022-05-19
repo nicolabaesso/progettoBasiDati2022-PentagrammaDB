@@ -466,10 +466,47 @@ L'associazione vuole costruire una base di dati affinché possa organizzare al m
 			\hline
 		\end{tabular}\\
 	\subsection{Partizionamento / Accorpamento di entità e associazioni}
+		Scaletta non serve a na sega.\\
+		La eliminiamo fisicamente, collegando studente,brano e evento assieme.
 	\subsection{Scelta degli identificatori principali}
 	\subsection{Diagramma E-R ristruttutato}
 		\includegraphics[scale=0.55]{../SchemaConcettuale/ER-LUCIDCHART - ER-concettuale 2.jpeg}
 	\subsection{Schema relazionale e vincoli di integrità referenziale}
+		Persona(\underline{CF},Nome,Cognome,DataNascita,Telefono,Email)\\
+		Audizione(\underline{DataAudizione})\\
+		Esame(\underline{LivelloAbilitazione},\underline{DataEsame})\\
+		Brano(\underline{NomeBrano}, \underline{Artista},Genere)\\
+		Evento(\underline{NomeEvento}, NumSpettatori, Genere, Organizzatore*, Co-Organizzatore*, TipoEvento)\\
+		Sede(\underline{NomeSede},Utilizzo,MaxPosti*,Indirizzo,Citta)\\
+		Attivita(\underline{CodiceAttivita},InizioAttivita,FineAttivita*,NumStudenti)\\
+		Corso(\underline{NomeCorso},DurataLezione,LezioniMese,TipologiaCorso,Descrizione*)\\
+		Associato(\underline{CodiceTessera}, CF,DataIscrizione, DataScadenza)\\
+		-Associato.CF$\rightarrow$Persona.CF\\\\
+		Studente(\underline{CF}, Tipologia, Livello*, InizioLezioni, FineLezioni*)\\
+		-Studente.CF$\rightarrow$Persona.CF\\\\
+		Docente(\underline{CF}, DataDiploma, Diploma, RuoloDirigente*, InizioDocenza, FineDocenza*,InizioDirigenza*,FineDirigenza*)\\
+		-Docente.CF$\rightarrow$Persona.CF\\\\
+		Accertamento(\underline{CF}, \underline{DataAudizione})\\
+		-Accertamento.CF$\rightarrow$Studente.CF\\
+		-Accertamento.DataAudizione$\rightarrow$Audizione.DataAudizione\\\\
+		Auditore(\underline{CF}, \underline{DataAudizione})\\
+		-Auditore.CF$\rightarrow$Docente.CF\\
+		-Auditore.DataAudizione$\rightarrow$Audizione.DataAudizione\\\\
+		Esaminatore(\underline{LivelloAbilitazione}, \underline{DataEsame},\underline{CF})\\
+		-Esaminatore.LivelloAbilitazione,Esaminatore.DataEsame$\rightarrow$Esame.LivelloAbilitazione,Esame.DataEsame\\
+		-Esaminatore.CF$\rightarrow$Docente.CF\\\\
+		Esaminato(\underline{LivelloAbilitazione}, \underline{DataEsame},\underline{CF},EsitoEsame)\\
+		-Esaminato.LivelloAbilitazione,Esaminato.DataEsame$\rightarrow$Esame.LivelloAbilitazione,Esame.DataEsame\\
+		-Esaminato.CF$\rightarrow$Studente.CF\\\\
+		Performance(\underline{CF},\underline{NomeBrano}, \underline{Artista})\\
+		-Performance.CF$\rightarrow$Studente.CF\\
+		-Performance.NomeBrano,Performance.Artista$\rightarrow$Brano.NomeBrano,Brano.Artista\\\\
+		Scaletta(\underline{NomeBrano}, \underline{Artista}, \underline{NomeEvento})\\
+		-Scaletta.NomeBrano,Scaletta.Artista$\rightarrow$Brano.NomeBrano,Brano.Artista\\
+		-Scaletta.NomeEvento$\rightarrow$Scaletta.NomeEvento\\\\
+		Apprendimento(\underline{CF},\underline{CodiceAttivita})\\
+		-Apprendimento.CF$\rightarrow$Studente.CF\\
+		-Apprendimento.CodiceAttivita$\rightarrow$Attivita.CodiceAttivita\\\\
 \section{Query}
 \section{Indice}
 \section{Codice C++}
